@@ -1,4 +1,4 @@
-package entities;
+package utils;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -13,13 +13,15 @@ public class WebRequestUtils {
 
     protected static HttpRequest request;
 
+    protected static String sessionUrl;
+
     public static HttpResponse<String> get() {
         try {
             client = HttpClient.newBuilder().build();
             request = HttpRequest
                     .newBuilder()
                     .GET()
-                    .uri(URI.create("https://http.cat/"))
+                    .uri(URI.create(sessionUrl))
                     .build();
 
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
